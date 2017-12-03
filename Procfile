@@ -1,1 +1,1 @@
-web: java $JAVA_OPTS -jar target/dependency/webapp-runner.jar
+web: java -jar target/SpringBootQuickStart-0.0.1-SNAPSHOT.jar
