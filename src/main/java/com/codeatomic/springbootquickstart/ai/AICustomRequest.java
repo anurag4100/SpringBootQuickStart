@@ -1,24 +1,32 @@
 package com.codeatomic.springbootquickstart.ai;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.google.gson.annotations.SerializedName;
 
-import ai.api.model.AIRequest;
-import ai.api.model.Result;
-
-public class AICustomRequest extends AIRequest{
+public class AICustomRequest {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
+	@SerializedName("sessionId")
+	private String sessionId;
+	
+	@SerializedName("result")
 	private Result result;
 
 	public Result getResult() {
 		return result;
 	}
 
-	@JsonIgnore
 	public void setResult(Result result) {
 		this.result = result;
 	}
+
+	public String getSessionId() {
+		return sessionId;
+	}
+
+	public void setSessionId(String sessionId) {
+		this.sessionId = sessionId;
+	}
+	
 	
 }

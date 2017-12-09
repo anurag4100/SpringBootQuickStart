@@ -10,8 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.codeatomic.springbootquickstart.topic.Address;
 import com.codeatomic.springbootquickstart.topic.Customer;
 
-import ai.api.model.AIRequest;
-import ai.api.model.AIResponse;
+import ai.api.model.Fulfillment;
 
 
 @RestController
@@ -20,20 +19,18 @@ public class WebhookController {
     
     @RequestMapping(method=RequestMethod.POST, value="/webhook/customers")
 	public ResponseEntity<AICustomResponse> addCustomer(@RequestBody AICustomRequest  aiRequest) {
-    	AICustomResponse resonse = new AICustomResponse();
-    	try {
-    		System.out.println("inside webhook controller: "+aiRequest.getResult().getResolvedQuery());
+    	
+    		System.out.println("inside webhook controller: "+aiRequest.getSessionId());
+    		
+    		AICustomResponse resonse = new AICustomResponse();
     		resonse.setDisplayText("abc");
     		resonse.setData(new Customer("Anurag", "andey", new Address()));
     		resonse.setLang("en");
-    		resonse.setSpeech("abcd");
+    		resonse.setSpeech("Good Job.");
     		resonse.setId("1234");
     		resonse.setSessionId("123456");
     		resonse.setSource("rest");
-		} catch (Exception e) {
-			return new ResponseEntity<>(resonse,HttpStatus.BAD_REQUEST);
-		}
-		return new ResponseEntity<>(resonse,HttpStatus.ACCEPTED);
+		return new ResponseEntity<>(resonse,HttpStatus.OK);
 	}
     
 	}
