@@ -1,6 +1,5 @@
 package com.codeatomic.springbootquickstart.topic;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -17,18 +16,11 @@ public class LibAiController {
 
     
     @RequestMapping(method=RequestMethod.POST, value="/webhook/customers")
-	public ResponseEntity<AIResponse> addCustomer(@RequestBody AIRequest  aiRequest) {
+	public ResponseEntity<AIResponse> addCustomer(@RequestBody AIResponse  aiRequest) {
     	AIResponse resonse = new AIResponse();
     	try {
-    		System.out.println("inside webhook controller: "+aiRequest.getOriginalRequest());
-    		 
-    	/*	"speech": "Barack Hussein Obama II was the 44th and current President of the United States.",
-    	    "displayText": "Barack Hussein Obama II was the 44th and current President of the United States, and the first African American to hold the office. Born in Honolulu, Hawaii, Obama is a graduate of Columbia University   and Harvard Law School, where ",
-    	    "data": {...},
-    	    "contextOut": [...],
-    	    "source": "DuckDuckGo"*/
-    		Result result = new Result();
-    		resonse.setResult(result);
+    		System.out.println("inside webhook controller: ");
+    		System.out.println("check :"+aiRequest.getResult().getResolvedQuery());
     		
 		} catch (Exception e) {
 			return new ResponseEntity<>(resonse,HttpStatus.BAD_REQUEST);
