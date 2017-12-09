@@ -16,11 +16,10 @@ public class LibAiController {
 
     
     @RequestMapping(method=RequestMethod.POST, value="/webhook/customers")
-	public ResponseEntity<AIResponse> addCustomer(@RequestBody AIResponse  aiRequest) {
+	public ResponseEntity<AIResponse> addCustomer(@RequestBody AIRequest  aiRequest) {
     	AIResponse resonse = new AIResponse();
     	try {
     		System.out.println("inside webhook controller: ");
-    		System.out.println("check :"+aiRequest.getResult().getResolvedQuery());
     		
 		} catch (Exception e) {
 			return new ResponseEntity<>(resonse,HttpStatus.BAD_REQUEST);
