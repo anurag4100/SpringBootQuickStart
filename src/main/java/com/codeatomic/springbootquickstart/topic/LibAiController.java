@@ -19,7 +19,7 @@ public class LibAiController {
 	public ResponseEntity<AIResponse> addCustomer(@RequestBody AIRequest  aiRequest) {
     	AIResponse resonse = new AIResponse();
     	try {
-    		System.out.println("inside webhook controller: ");
+    		System.out.println("inside webhook controller: "+aiRequest.getSessionId());
     		
 		} catch (Exception e) {
 			return new ResponseEntity<>(resonse,HttpStatus.BAD_REQUEST);
