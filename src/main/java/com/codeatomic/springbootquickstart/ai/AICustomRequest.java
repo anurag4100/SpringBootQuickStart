@@ -10,13 +10,13 @@ public class AICustomRequest extends AIRequest{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	@JsonIgnore
 	private Result result;
 
 	public Result getResult() {
 		return result;
 	}
 
+	@JsonIgnore
 	public void setResult(Result result) {
 		this.result = result;
 	}

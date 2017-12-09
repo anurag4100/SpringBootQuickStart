@@ -19,7 +19,7 @@ public class WebhookController {
 
     
     @RequestMapping(method=RequestMethod.POST, value="/webhook/customers")
-	public ResponseEntity<AICustomResponse> addCustomer(@RequestBody AIResponse  aiRequest) {
+	public ResponseEntity<AICustomResponse> addCustomer(@RequestBody AICustomRequest  aiRequest) {
     	AICustomResponse resonse = new AICustomResponse();
     	try {
     		System.out.println("inside webhook controller: "+aiRequest);
