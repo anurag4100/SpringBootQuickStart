@@ -1,8 +1,5 @@
 package com.codeatomic.springbootquickstart.ai;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
-import ai.api.model.AIRequest;
 import ai.api.model.Result;
 
 public class AICustomRequest {
