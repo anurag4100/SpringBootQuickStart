@@ -22,7 +22,7 @@ public class WebhookController {
 	public ResponseEntity<AICustomResponse> addCustomer(@RequestBody AICustomRequest  aiRequest) {
     	AICustomResponse resonse = new AICustomResponse();
     	try {
-    		System.out.println("inside webhook controller: "+aiRequest);
+    		System.out.println("inside webhook controller: "+aiRequest.getResult().getResolvedQuery());
     		resonse.setDisplayText("abc");
     		resonse.setData(new Customer("Anurag", "andey", new Address()));
     		resonse.setLang("en");
