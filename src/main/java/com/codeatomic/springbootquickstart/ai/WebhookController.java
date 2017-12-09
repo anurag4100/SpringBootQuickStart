@@ -11,6 +11,7 @@ import com.codeatomic.springbootquickstart.topic.Address;
 import com.codeatomic.springbootquickstart.topic.Customer;
 
 import ai.api.model.AIRequest;
+import ai.api.model.AIResponse;
 
 
 @RestController
@@ -18,7 +19,7 @@ public class WebhookController {
 
     
     @RequestMapping(method=RequestMethod.POST, value="/webhook/customers")
-	public ResponseEntity<AICustomResponse> addCustomer(@RequestBody AIRequest  aiRequest) {
+	public ResponseEntity<AICustomResponse> addCustomer(@RequestBody AIResponse  aiRequest) {
     	AICustomResponse resonse = new AICustomResponse();
     	try {
     		System.out.println("inside webhook controller: "+aiRequest);
