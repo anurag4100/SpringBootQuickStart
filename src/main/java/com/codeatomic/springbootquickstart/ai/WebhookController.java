@@ -10,16 +10,18 @@ import org.springframework.web.bind.annotation.RestController;
 import com.codeatomic.springbootquickstart.topic.Address;
 import com.codeatomic.springbootquickstart.topic.Customer;
 
+import ai.api.model.AIRequest;
+
 
 @RestController
 public class WebhookController {
 
     
     @RequestMapping(method=RequestMethod.POST, value="/webhook/customers")
-	public ResponseEntity<AICustomResponse> addCustomer(@RequestBody AICustomRequest  aiRequest) {
+	public ResponseEntity<AICustomResponse> addCustomer(@RequestBody AIRequest  aiRequest) {
     	AICustomResponse resonse = new AICustomResponse();
     	try {
-    		System.out.println("inside webhook controller: "+aiRequest.getResult().getResolvedQuery());
+    		System.out.println("inside webhook controller: "+aiRequest);
     		resonse.setDisplayText("abc");
     		resonse.setData(new Customer("Anurag", "andey", new Address()));
     		resonse.setLang("en");
