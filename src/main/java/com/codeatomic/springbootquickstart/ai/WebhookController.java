@@ -16,7 +16,7 @@ public class WebhookController {
 	public ResponseEntity<AICustomResponse> addCustomer(@RequestBody AICustomRequest  aiRequest) {
     	AICustomResponse resonse = new AICustomResponse();
     	try {
-    		System.out.println("inside webhook controller: "+aiRequest.getSessionId());
+    		System.out.println("inside webhook controller: "+aiRequest.getResult().getResolvedQuery());
 		} catch (Exception e) {
 			return new ResponseEntity<>(resonse,HttpStatus.BAD_REQUEST);
 		}
