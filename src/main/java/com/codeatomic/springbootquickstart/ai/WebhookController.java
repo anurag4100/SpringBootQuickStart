@@ -28,8 +28,8 @@ public class WebhookController {
     	
     		System.out.println("inside webhook controller: "+aiRequest.getSessionId());
     		List<Customer> customer = new ArrayList<>();
-    		if (aiRequest.getResult().getStringParameter("id")!=null && !aiRequest.getResult().getStringParameter("id").isEmpty()) {
-    			customer = (List<Customer>) customerRepository.findById(Long.valueOf(aiRequest.getResult().getStringParameter("id", "1")));
+    		if (aiRequest.getResult().getStringParameter("number")!=null && !aiRequest.getResult().getStringParameter("number").isEmpty()) {
+    			customer = (List<Customer>) customerRepository.findById(Long.valueOf(aiRequest.getResult().getStringParameter("number", "1")));
 			} else {
 				customer = (List<Customer>) customerRepository.findByfirstName(aiRequest.getResult().getStringParameter("given-name", "anurag"));
 			}
