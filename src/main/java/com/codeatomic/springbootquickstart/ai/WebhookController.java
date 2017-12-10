@@ -28,23 +28,33 @@ public class WebhookController {
     	
     		System.out.println("inside webhook controller: "+aiRequest.getSessionId());
     		List<Customer> customer = new ArrayList<>();
-    		if (aiRequest.getResult().getStringParameter("number")!=null && !aiRequest.getResult().getStringParameter("number").isEmpty()) {
-    			customer = (List<Customer>) customerRepository.findById(Long.valueOf(aiRequest.getResult().getStringParameter("number", "1")));
+    		if (aiRequest.getResult().getStringParameter("Customer-id")!=null && !aiRequest.getResult().getStringParameter("Customer-id").isEmpty()) {
+    			customer = (List<Customer>) customerRepository.findById(Long.valueOf(aiRequest.getResult().getStringParameter("Customer-id", "1")));
 			} else {
-				customer = (List<Customer>) customerRepository.findByfirstName(aiRequest.getResult().getStringParameter("given-name", "anurag"));
+				customer = (List<Customer>) customerRepository.findByfirstName(aiRequest.getResult().getStringParameter("customer", "anurag"));
 			}
     		
-    		System.out.println(customer.get(0).toString());
-    		AICustomResponse resonse = new AICustomResponse();
-    		resonse.setDisplayText(customer.get(0).toString());
-    		resonse.setData(new Customer("Anurag", "andey", new Address()));
-    		resonse.setLang("en");
-    		resonse.setSpeech(customer.get(0).toString());
-    		resonse.setId("1234");
-    		resonse.setSessionId("123456");
-    		resonse.setSource("rest");
+    		try {
+    			System.out.println(customer.get(0).toString());
+        		AICustomResponse resonse = new AICustomResponse();
+        		resonse.setDisplayText(customer.get(0).toString());
+        		resonse.setData(new Customer("Anurag", "andey", new Address()));
+        		resonse.setLang("en");
+        		resonse.setSpeech(customer.get(0).toString());
+        		resonse.setId("1234");
+        		resonse.setSessionId("123456");
+        		resonse.setSource("rest");
+        		
+    		return new ResponseEntity<>(resonse,HttpStatus.OK);
+			} catch (Exception e) {
+				AICustomResponse resonse = new AICustomResponse();
+        		resonse.setDisplayText("Sorry. Couldn't find any record for your query.");
+        		resonse.setLang("en");
+        		resonse.setSpeech("Sorry. Couldn't find any record for your query.");
+        		resonse.setSource("rest");
+        		return new ResponseEntity<>(resonse,HttpStatus.OK);
+			}
     		
-		return new ResponseEntity<>(resonse,HttpStatus.OK);
 	}
     
 	}
