@@ -1,5 +1,6 @@
 package com.codeatomic.springbootquickstart.topic;
 
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -16,11 +17,12 @@ public class Customer {
     private Long id;
     private String firstName;
     private String lastName;
+    private String dob;
     private Address address;
     
     protected Customer() {}
 
-    public Customer(String firstName, String lastName, Address address) {
+	public Customer(String firstName, String lastName, Address address) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.address = address;
@@ -49,12 +51,23 @@ public class Customer {
 	public void setAddress(Address address) {
 		this.address = address;
 	}
+	
+    public String getDob() {
+		return dob;
+	}
+
+	public void setDob(String dob) {
+		this.dob = dob;
+	}
+
+
 
 	@Override
     public String toString() {
         return String.format(
-                "Customer[id=%d, firstName='%s', lastName='%s']",
-                id, firstName, lastName);
+                "Customer ID is %d. Hi first name is %s and last name is %s. His date o birth is %s."
+                + "He stays at %s , %s ,%s.",
+                id, firstName, lastName,dob,address.getLine1(),address.getLine2(),address.getZipCode());
     }
 
 }
