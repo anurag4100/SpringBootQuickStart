@@ -1,5 +1,7 @@
 package com.codeatomic.springbootquickstart.ai;
 
+
+
 /***********************************************************************************************************************
  *
  * API.AI Java SDK - client-side libraries for API.AI
@@ -21,16 +23,13 @@ package com.codeatomic.springbootquickstart.ai;
  *
  ***********************************************************************************************************************/
 
-import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import com.google.gson.JsonPrimitive;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 import java.text.ParseException;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.List;
 
 import ai.api.util.StringUtils;
@@ -57,7 +56,7 @@ public class Result implements Serializable {
      * This field will be deserialized as hashMap container with all parameters and it's values
      */
     @SerializedName("parameters")
-    private HashMap<String, JsonElement> parameters;
+    private HashMap<String, Object> parameters;
 
     /**
      * Currently active contexts
@@ -117,7 +116,7 @@ public class Result implements Serializable {
         this.metadata = metadata;
     }
 
-    public HashMap<String, JsonElement> getParameters() {
+    public HashMap<String,Object> getParameters() {
         return parameters;
     }
 
@@ -127,7 +126,7 @@ public class Result implements Serializable {
 
     public String getStringParameter(final String name, final String defaultValue) {
         if (parameters.containsKey(name)) {
-            final String parameterValue = parameters.get(name).getAsString();
+            final String parameterValue = parameters.get(name).toString();
             return parameterValue;
         }
         return defaultValue;
@@ -139,7 +138,7 @@ public class Result implements Serializable {
 
     public Date getDateParameter(final String name, final Date defaultValue) throws IllegalArgumentException {
         if (parameters.containsKey(name)) {
-            final String parameterStringValue = parameters.get(name).getAsString();
+            final String parameterStringValue = parameters.get(name).toString();
 
             if (StringUtils.isEmpty(parameterStringValue)) {
                 return defaultValue;
@@ -161,7 +160,7 @@ public class Result implements Serializable {
 
     public Date getDateTimeParameter(final String name, final Date defaultValue) throws IllegalArgumentException {
         if (parameters.containsKey(name)) {
-            final String parameterStringValue = parameters.get(name).getAsString();
+            final String parameterStringValue = parameters.get(name).toString();
 
             if (StringUtils.isEmpty(parameterStringValue)) {
                 return defaultValue;
@@ -183,7 +182,7 @@ public class Result implements Serializable {
 
     public Date getTimeParameter(final String name, final Date defaultValue) throws IllegalArgumentException {
         if (parameters.containsKey(name)) {
-            final String parameterStringValue = parameters.get(name).getAsString();
+            final String parameterStringValue = parameters.get(name).toString();
 
             if (StringUtils.isEmpty(parameterStringValue)) {
                 return defaultValue;
@@ -205,7 +204,7 @@ public class Result implements Serializable {
 
     public int getIntParameter(final String name, final int defaultValue) {
         if (parameters.containsKey(name)) {
-            final String parameterStringValue = parameters.get(name).getAsString();
+            final String parameterStringValue = parameters.get(name).toString();
 
             if (StringUtils.isEmpty(parameterStringValue)) {
                 return defaultValue;
@@ -222,7 +221,7 @@ public class Result implements Serializable {
 
     public float getFloatParameter(final String name, final float defaultValue) {
         if (parameters.containsKey(name)) {
-            final String parameterStringValue = parameters.get(name).getAsString();
+            final String parameterStringValue = parameters.get(name).toString();
 
             if (StringUtils.isEmpty(parameterStringValue)) {
                 return defaultValue;
@@ -232,9 +231,9 @@ public class Result implements Serializable {
         }
         return defaultValue;
     }
-    public JsonObject getComplexParameter(final String name, final JsonObject defaultValue) {
+    public Object getComplexParameter(final String name, final JsonObject defaultValue) {
         if (parameters.containsKey(name)) {
-            final JsonObject jsonObject = parameters.get(name).getAsJsonObject();
+            final Object jsonObject = parameters.get(name);
 
             if (jsonObject == null) {
                 return defaultValue;
@@ -245,7 +244,7 @@ public class Result implements Serializable {
         return defaultValue;
     }
 
-    public JsonObject getComplexParameter(final String name) {
+    public Object getComplexParameter(final String name) {
         return getComplexParameter(name, null);
     }
 
@@ -288,23 +287,6 @@ public class Result implements Serializable {
 
     public void setActionIncomplete(final boolean actionIncomplete) {
         this.actionIncomplete = actionIncomplete;
-    }
-
-    void trimParameters() {
-        if (parameters != null) {
-            final List<String> parametersToTrim = new LinkedList<String>();
-            for (final String key : parameters.keySet()) {
-                final JsonElement jsonElement = parameters.get(key);
-                if (jsonElement != null && jsonElement.isJsonPrimitive()) {
-                    if (((JsonPrimitive) jsonElement).isString() && StringUtils.isEmpty(jsonElement.getAsString())) {
-                        parametersToTrim.add(key);
-                    }
-                }
-            }
-            for (final String key : parametersToTrim) {
-                parameters.remove(key);
-            }
-        }
     }
 
     @Override
