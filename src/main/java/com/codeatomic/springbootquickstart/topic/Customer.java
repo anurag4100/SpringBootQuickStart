@@ -65,7 +65,7 @@ public class Customer {
 	@Override
     public String toString() {
         return String.format(
-                "Customer ID is %d. Hi first name is %s and last name is %s. His date o birth is %s."
+                "Customer ID is %d. Hi first name is %s and last name is %s. His date of birth is %s."
                 + "He stays at %s , %s ,%s.",
                 id, firstName, lastName,dob,address.getLine1(),address.getLine2(),address.getZipCode());
     }
