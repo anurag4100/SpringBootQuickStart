@@ -61,8 +61,8 @@ public class Result implements Serializable {
     /**
      * Currently active contexts
      */
-    @SerializedName("contexts")
-    private List<AIOutputContext> contexts;
+    //@SerializedName("contexts")
+    //private List<AIOutputContext> contexts;
 
 
     @SerializedName("metadata")
@@ -248,7 +248,7 @@ public class Result implements Serializable {
         return getComplexParameter(name, null);
     }
 
-    public List<AIOutputContext> getContexts() {
+  /*  public List<AIOutputContext> getContexts() {
         return contexts;
     }
 
@@ -268,7 +268,7 @@ public class Result implements Serializable {
         }
 
         return null;
-    }
+    }*/
 
     /**
      * The query that was used to produce this result
